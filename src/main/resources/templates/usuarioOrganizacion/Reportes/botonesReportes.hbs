@@ -1,0 +1,65 @@
+{{#partial "botonHome" }}
+    <a href="/homeorg" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/areas">Areas</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/empleados">Empleados</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/calcularHCOrg">Calculadora HC</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/cargaDeReportes">Carga de Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/reportes">Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/contactos">Contactos</a></li>
+
+        </ul>
+    </div>
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerUbicacion">
+            <h3 class="textoIngreso" >Reportes </h3>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom" href="/reportes/historico">HC Historico</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom "href="/reportes/composicion">Composicion HC</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+{{> base.hbs }}

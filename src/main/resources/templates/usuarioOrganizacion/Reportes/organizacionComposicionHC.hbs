@@ -1,0 +1,260 @@
+{{#partial "botonHome" }}
+    <a href="/homeorg" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/areas">Areas</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/empleados">Empleados</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/calcularHCOrg">Calculadora HC</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/cargaDeReportes">Carga de Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/reportes">Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/contactos">Contactos</a></li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerUbicacion">
+            <h3 class="textoIngreso" >Composicion HC</h3>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="d-flex justify-content-around">
+                        <h3 class="textoIngreso">Composicion de HC de {{nombre}}</h3>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <canvas id="graph"></canvas>
+                </div>
+
+                {{! -------1/8------- }}
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> COMBUSTION_FIJA </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_FIJA}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadCOMBUSTION_FIJA}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------2/8------- }}
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> COMBUSTION_MOVIL </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_MOVIL}}hc </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadCOMBUSTION_MOVIL}}% </span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------3/8------- }}
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> ELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------4/8------- }}
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------5/8------- }}
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> TRANSPORTE_PUBLICO </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadTRANSPORTE_PUBLICO}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------6/8------- }}
+
+
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> TRANSPORTE_PARTICULAR </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadTRANSPORTE_PARTICULAR}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------7/8------- }}
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> SERVICIO_CONTRATADO </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_CONTRATADO}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadSERVICIO_CONTRATADO}}%</span>
+                        </div>
+                    </div>
+                </div>
+                {{! -------8/8------- }}
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> SERVICIO_ECOLOGICO </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}hc</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex justify-content-center">
+                            <span class="listStyle"> {{reporte.porcentajetipoDeActividadSERVICIO_ECOLOGICO}}%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+
+
+{{#partial "js"}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var graph = document.getElementById('graph');
+
+
+
+        const labels = [
+            'COMBUSTION_FIJA',
+            'COMBUSTION_MOVIL',
+            'ELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA',
+            'LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS',
+            'TRANSPORTE_PUBLICO',
+            'TRANSPORTE_PARTICULAR',
+            'SERVICIO_CONTRATADO',
+            'SERVICIO_ECOLOGICO']
+
+        const colors = ['rgb(22,62,46)', 'rgb(29,84,61)', 'rgb(36,105,77)', 'rgb(43,127,92)','rgb(56,170,123)','rgb(63,192,139)','rgb(83,200,152)','rgb(104,207,165)'];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}},
+                    {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}},
+                    {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}},
+                    {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}},
+                    {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}},
+                    {{reporte.tipoDeActividadSERVICIO_CONTRATADO}},
+                    {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}
+                ],
+                backgroundColor: colors
+            }]
+        }
+
+        const config = {
+            type: 'pie',
+            data: data,
+        };
+
+        var composicionChart = new Chart(graph, config);
+
+    </script>
+{{/partial}}
+
+
+{{> base.hbs }}

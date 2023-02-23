@@ -1,0 +1,74 @@
+{{#partial "botonHome" }}
+    <a href="/home" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/organizaciones">Organizaciones</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/trayectos">Trayectos</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/calcularhc">Calcular HC</a></li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerUbicacion">
+            <h3 class="textoIngreso">Solicitudes</h3>
+        </div>
+    </div>
+<div class="d-flex flex-column" id="content-wrap">
+    <div class=" d-flex align-self-center conteinerRegistro">
+        <main>
+            <form class="was-validated" novalidate method="POST" action="/solicitudes">
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <label name="tramoCompartido" class="form-label texto" style="font-size: 24px !important; padding:0px !important;" id="nombreDelTramo">Tramo Compartido</label>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-6">
+                            <label for="trayectos" class="form-label textoInputs">Mis Trayectos</label>
+                            <select name="idTrayecto" class="form-select form-select-custom" id="trayectos" required>
+                                <option selected disabled value="">-- Elegir Trayecto --</option>
+                                {{#each trayectos}}
+                                <option value="{{id}}">{{descripcion}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="trayectos" class="form-label textoInputs">Tramos Compartidos</label>
+                            <select name="idTramo" class="form-select form-select-custom" id="tramos" required>
+                                <option selected disabled value="">-- Elegir Tramo --</option>
+                                {{#each tramos}}
+                                <option value="{{id}}">Tramo {{id}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                    <button class=" btn-custom " type="submit" id="idAniadir">Aceptar</button>
+                </div>
+            </form>
+        </main>
+        </div>
+    </div>
+
+{{/partial}}
+{{> base.hbs }}

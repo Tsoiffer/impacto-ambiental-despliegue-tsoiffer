@@ -1,0 +1,115 @@
+{{#partial "botonHome" }}
+    <a href="/agenteSectorial" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/agenteSectorial/organizaciones">Organizaciones</a></li>
+
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="d-flex justify-content-around">
+                        <h3 class="textoIngreso">Historico de HC{{nombre}}</h3>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax; min-width: 700px !important;">
+                    <div class="col-md-12">
+                        <canvas id="graph" style=" height: 350px; width: 700px;"></canvas>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="list-group" id="boxTrayectos">
+                        {{#each reporte.reportesMensuales}}
+                            <li class="list-group-item d-flex justify-content-center align-items-start align-middle texto">
+                                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                    <div class="col-md-4">
+                                        <span class="listStyle" > {{anio}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="listStyle" > {{periodo}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="listStyle" > {{hc}} 𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
+                                    </div>
+                                </div>
+                            </li>
+                        {{/each}}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+
+
+{{#partial "js"}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var graph = document.getElementById('graph');
+
+
+
+        const labels = [
+            {{#each reporte.reportesMensuales}}
+                '{{periodo}} - {{anio}}',
+            {{/each}}
+        ]
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: "Hc total por mes",
+                data: [
+                    {{#each reporte.reportesMensuales}}
+                        {{hc}},
+                    {{/each}}
+                ],
+                backgroundColor: 'rgb(36,105,77)'
+
+
+            }]
+        }
+
+        const config = {
+            type: 'bar',
+            data: data,
+        };
+
+        var historicoChart = new Chart(graph, config);
+
+    </script>
+{{/partial}}
+
+
+{{> base.hbs }}
